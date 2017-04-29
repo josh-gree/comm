@@ -2,7 +2,6 @@ package comm
 
 import (
 	"fmt"
-	"time"
 	"bytes"
 	"encoding/json"
 	"net/http"
