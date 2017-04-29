@@ -19,7 +19,7 @@ type JobMessage struct{
 	Service string `json:"service"`
 }
 
-var locs = map[string]string{"sum":"sum/job","prod":"prod/job"}
+var locs = map[string]string{"sum":"sum:8000/job","prod":"prod:8000/job"}
 
 func (j *JobMessage) Recieve(public bool, service ...func(data []float64, id int)) func(c echo.Context) error{
 	return func (c echo.Context) error{
