@@ -86,7 +86,7 @@ func (r *ResMessage) Send(dest string) error {
 		return err
 	}
 
-	log.WithFields(log.Fields{"result": r.Result, "Id": r.Id}).Info("Sending result to %s", dest)
+	log.WithFields(log.Fields{"result": r.Result, "Id": r.Id}).Info("Sending result to ", dest)
 
 	_, err = http.Post(fmt.Sprintf("http://%s", dest), "application/json", bytes.NewBuffer(data))
 	if err != nil {
