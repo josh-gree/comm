@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"net/http"
 
+	log "github.com/Sirupsen/logrus"
 	"github.com/labstack/echo"
 )
 
@@ -84,6 +85,8 @@ func (r *ResMessage) Send(dest string) error {
 		fmt.Println(err)
 		return err
 	}
+
+	log.WithFields(log.Fields{"data": string(data)}).Info("Sending Data to %s", dest)
 
 	_, err = http.Post(fmt.Sprintf("http://%s", dest), "application/json", bytes.NewBuffer(data))
 	if err != nil {
