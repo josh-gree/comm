@@ -26,6 +26,7 @@ func (j *JobMessage) Recieve(public bool, service ...func(data []float64, id int
 			// fmt.Println(err)
 			return err
 		}
+		log.WithFields(log.Fields{"data": j.Data, "Id": j.Id, "service": j.Service}).Info("Recived job")
 		// fmt.Printf("%#v\n", j)
 		if public {
 			// Send Job to service
@@ -46,7 +47,7 @@ func (j *JobMessage) Send(dest string) error {
 		// fmt.Println(err)
 		return err
 	}
-
+	log.WithFields(log.Fields{"data": j.Data, "Id": j.Id, "service": j.Service}).Info("Sending job to ", dest)
 	_, err = http.Post(fmt.Sprintf("http://%s", dest), "application/json", bytes.NewBuffer(data))
 	if err != nil {
 		// fmt.Println(err)
