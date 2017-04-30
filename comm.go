@@ -1,5 +1,5 @@
 package comm
-
+// A comment
 import (
 	"fmt"
 	"bytes"
