@@ -67,7 +67,7 @@ func (r *ResMessage) Recieve(public bool) func(c echo.Context) error {
 			// fmt.Println(err)
 			return err
 		}
-
+		log.WithFields(log.Fields{"result": r.Result, "Id": r.Id}).Info("Recived result")
 		if public {
 			// Log result to stdout
 			// fmt.Printf("%#v\n", r)
@@ -86,7 +86,7 @@ func (r *ResMessage) Send(dest string) error {
 		return err
 	}
 
-	log.WithFields(log.Fields{"data": string(data)}).Info("Sending Data to %s", dest)
+	log.WithFields(log.Fields{"result": r.Result, "Id": r.Id}).Info("Sending result to %s", dest)
 
 	_, err = http.Post(fmt.Sprintf("http://%s", dest), "application/json", bytes.NewBuffer(data))
 	if err != nil {
