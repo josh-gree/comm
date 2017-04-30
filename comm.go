@@ -10,13 +10,8 @@ import (
 	"github.com/labstack/echo"
 )
 
-type Message interface {
-	Recieve()
-	Send()
-}
-
 type JobMessage struct {
-	Id      int       `json:"id"`
+	ID      int       `json:"id"`
 	Data    []float64 `json:"data"`
 	Service string    `json:"service"`
 }
@@ -37,7 +32,7 @@ func (j *JobMessage) Recieve(public bool, service ...func(data []float64, id int
 		} else {
 			// Do Job
 			// Send result to public
-			go service[0](j.Data, j.Id)
+			go service[0](j.Data, j.ID)
 		}
 
 		return nil
@@ -60,7 +55,7 @@ func (j *JobMessage) Send(dest string) error {
 }
 
 type ResMessage struct {
-	Id     int     `json:"id"`
+	ID     int     `json:"id"`
 	Result float64 `json:"result"`
 }
 
