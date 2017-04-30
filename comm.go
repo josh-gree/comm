@@ -1,5 +1,5 @@
 package comm
-
+// TODO: add logging
 import (
 	"fmt"
 	"bytes"
