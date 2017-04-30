@@ -23,10 +23,10 @@ func (j *JobMessage) Recieve(public bool, service ...func(data []float64, id int
 	return func(c echo.Context) error {
 		err := c.Bind(&j)
 		if err != nil {
-			fmt.Println(err)
+			// fmt.Println(err)
 			return err
 		}
-		fmt.Printf("%#v\n", j)
+		// fmt.Printf("%#v\n", j)
 		if public {
 			// Send Job to service
 			j.Send(locs[j.Service])
@@ -43,13 +43,13 @@ func (j *JobMessage) Recieve(public bool, service ...func(data []float64, id int
 func (j *JobMessage) Send(dest string) error {
 	data, err := json.Marshal(j)
 	if err != nil {
-		fmt.Println(err)
+		// fmt.Println(err)
 		return err
 	}
 
 	_, err = http.Post(fmt.Sprintf("http://%s", dest), "application/json", bytes.NewBuffer(data))
 	if err != nil {
-		fmt.Println(err)
+		// fmt.Println(err)
 		return err
 	}
 	return nil
@@ -64,13 +64,13 @@ func (r *ResMessage) Recieve(public bool) func(c echo.Context) error {
 	return func(c echo.Context) error {
 		err := c.Bind(&r)
 		if err != nil {
-			fmt.Println(err)
+			// fmt.Println(err)
 			return err
 		}
 
 		if public {
 			// Log result to stdout
-			fmt.Printf("%#v\n", r)
+			// fmt.Printf("%#v\n", r)
 		} else {
 			// This will never happen (services do not recieve results)
 		}
@@ -82,7 +82,7 @@ func (r *ResMessage) Recieve(public bool) func(c echo.Context) error {
 func (r *ResMessage) Send(dest string) error {
 	data, err := json.Marshal(r)
 	if err != nil {
-		fmt.Println(err)
+		// fmt.Println(err)
 		return err
 	}
 
@@ -90,7 +90,7 @@ func (r *ResMessage) Send(dest string) error {
 
 	_, err = http.Post(fmt.Sprintf("http://%s", dest), "application/json", bytes.NewBuffer(data))
 	if err != nil {
-		fmt.Println(err)
+		// fmt.Println(err)
 		return err
 	}
 	return nil
