@@ -11,7 +11,7 @@ import (
 )
 
 type JobMessage struct {
-	ID      int       `json:"id"`
+	Id      int       `json:"id"`
 	Data    []float64 `json:"data"`
 	Service string    `json:"service"`
 }
@@ -32,7 +32,7 @@ func (j *JobMessage) Recieve(public bool, service ...func(data []float64, id int
 		} else {
 			// Do Job
 			// Send result to public
-			go service[0](j.Data, j.ID)
+			go service[0](j.Data, j.Id)
 		}
 
 		return nil
@@ -55,7 +55,7 @@ func (j *JobMessage) Send(dest string) error {
 }
 
 type ResMessage struct {
-	ID     int     `json:"id"`
+	Id     int     `json:"id"`
 	Result float64 `json:"result"`
 }
 
